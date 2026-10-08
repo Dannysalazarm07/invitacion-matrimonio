@@ -27,8 +27,10 @@ const wedding = {
   children: "Completa aquí la información sobre la asistencia de niños.",
 };
 
-const invitedGuests = ["Maria", "Carlos", "Samuel", "Viviana", "Miguel"];
+const invitedGuests = ["Maria", "Carlos", "Samuel", "Viviana", "Miguel", "a"];
 const byId = (id) => document.getElementById(id);
+const musicStartTime = 34;
+let musicStartedAtRequestedPosition = false;
 
 // Actualiza los textos y crea enlaces de mapas a partir de las direcciones configuradas.
 function populateInvitation() {
@@ -182,12 +184,80 @@ function validateGuest(event) {
   const screen = byId("envelope-screen");
   const invitation = byId("invitation");
 
+  startBackgroundMusic();
   invitation.hidden = false;
   screen.classList.add("is-opening");
   window.setTimeout(() => {
     screen.hidden = true;
     invitation.scrollIntoView({ behavior: "smooth", block: "start" });
   }, 500);
+}
+
+function updateMusicButton(isPlaying) {
+  const button = byId("music-toggle");
+  button.hidden = false;
+  button.textContent = isPlaying ? "Ⅱ" : "♫";
+  button.setAttribute("aria-label", `${isPlaying ? "Pausar" : "Reproducir"} música de fondo`);
+  button.setAttribute("aria-pressed", String(isPlaying));
+}
+
+function reportMusicError(error) {
+  console.error("No se pudo reproducir la música de fondo.", error);
+  updateMusicButton(false);
+}
+
+function replayBackgroundMusic() {
+  const music = byId("background-music");
+  music.currentTime = musicStartTime;
+  music.play().then(
+    () => updateMusicButton(true),
+    reportMusicError,
+  );
+}
+
+function startBackgroundMusic() {
+  const music = byId("background-music");
+
+  music.volume = 0.12;
+  if (!musicStartedAtRequestedPosition) {
+    const seekToStart = () => {
+      if (musicStartedAtRequestedPosition) {
+        return;
+      }
+      if (Number.isFinite(music.duration) && music.duration <= musicStartTime) {
+        reportMusicError(new Error("El audio dura 34 segundos o menos."));
+        return;
+      }
+
+      music.currentTime = musicStartTime;
+      musicStartedAtRequestedPosition = true;
+    };
+
+    if (music.readyState >= HTMLMediaElement.HAVE_METADATA) {
+      seekToStart();
+      if (!musicStartedAtRequestedPosition) {
+        return;
+      }
+    } else {
+      music.addEventListener("loadedmetadata", seekToStart, { once: true });
+    }
+  }
+
+  music.play().then(
+    () => updateMusicButton(true),
+    reportMusicError,
+  );
+}
+
+function toggleBackgroundMusic() {
+  const music = byId("background-music");
+  if (music.paused) {
+    startBackgroundMusic();
+    return;
+  }
+
+  music.pause();
+  updateMusicButton(false);
 }
 
 function openDetailsEnvelope() {
@@ -218,6 +288,8 @@ byId("guest-name").addEventListener("input", () => {
   byId("guest-name").removeAttribute("aria-invalid");
 });
 byId("open-details").addEventListener("click", openDetailsEnvelope);
+byId("music-toggle").addEventListener("click", toggleBackgroundMusic);
+byId("background-music").addEventListener("ended", replayBackgroundMusic);
 
 populateInvitation();
 startCountdown();
