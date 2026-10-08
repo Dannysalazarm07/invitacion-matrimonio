@@ -27,10 +27,8 @@ const wedding = {
   children: "Completa aquí la información sobre la asistencia de niños.",
 };
 
-const invitedGuests = ["Maria", "Carlos", "Samuel", "Viviana", "Miguel", "a"];
+const invitedGuests = ["Maria", "Carlos", "Samuel", "Viviana", "Miguel"];
 const byId = (id) => document.getElementById(id);
-const musicStartTime = 34;
-let musicStartedAtRequestedPosition = false;
 
 // Actualiza los textos y crea enlaces de mapas a partir de las direcciones configuradas.
 function populateInvitation() {
@@ -208,7 +206,7 @@ function reportMusicError(error) {
 
 function replayBackgroundMusic() {
   const music = byId("background-music");
-  music.currentTime = musicStartTime;
+  music.currentTime = 0;
   music.play().then(
     () => updateMusicButton(true),
     reportMusicError,
@@ -219,30 +217,6 @@ function startBackgroundMusic() {
   const music = byId("background-music");
 
   music.volume = 0.12;
-  if (!musicStartedAtRequestedPosition) {
-    const seekToStart = () => {
-      if (musicStartedAtRequestedPosition) {
-        return;
-      }
-      if (Number.isFinite(music.duration) && music.duration <= musicStartTime) {
-        reportMusicError(new Error("El audio dura 34 segundos o menos."));
-        return;
-      }
-
-      music.currentTime = musicStartTime;
-      musicStartedAtRequestedPosition = true;
-    };
-
-    if (music.readyState >= HTMLMediaElement.HAVE_METADATA) {
-      seekToStart();
-      if (!musicStartedAtRequestedPosition) {
-        return;
-      }
-    } else {
-      music.addEventListener("loadedmetadata", seekToStart, { once: true });
-    }
-  }
-
   music.play().then(
     () => updateMusicButton(true),
     reportMusicError,
