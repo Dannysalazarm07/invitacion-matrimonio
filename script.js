@@ -21,10 +21,11 @@ const wedding = {
     address: "Calle 123, Mz 35-42, vía al Salado, barrio Santa Ana, Ibagué, Tolima",
   },
   dressCode: "Vestuario formal",
-  menDressCode: "No llevar traje azul ni beige, ni corbatín.",
-  womenDressCode: "No llevar vestido blanco.",
-  parking: "Completa aquí la información sobre parqueadero.",
-  children: "Completa aquí la información sobre la asistencia de niños.",
+  menDressCode: "No llevar traje azul ni beige, ni corbatín",
+  womenDressCode: "No llevar vestido blanco",
+  parking: "Sí, habrá parqueaderos disponibles para carros y motocicletas, tanto en el lugar de la ceremonia como en el de la celebración.",
+  children: "Preferiblemente no, por los horarios del evento y las responsabilidades adicionales que implicaría para los papás. Agradecemos mucho su comprensión.",
+  arrival: "Recomendamos llegar al menos 15 minutos antes de la hora indicada.",
 };
 
 const invitedGuests = ["Maria", "Carlos", "Samuel", "Viviana", "Miguel"];
@@ -46,19 +47,22 @@ function populateInvitation() {
   byId("women-dress-code").textContent = wedding.womenDressCode;
   byId("parking-answer").textContent = wedding.parking;
   byId("children-answer").textContent = wedding.children;
+  byId("arrival-answer").textContent = wedding.arrival;
 
   const date = new Date(wedding.date);
   if (Number.isNaN(date.getTime())) {
     throw new Error("La fecha de la boda en script.js no tiene un formato válido.");
   }
 
-  byId("wedding-date").textContent = new Intl.DateTimeFormat("es-CO", {
+  const formattedDate = new Intl.DateTimeFormat("es-CO", {
     weekday: "long",
     day: "numeric",
     month: "long",
     year: "numeric",
     timeZone: wedding.timeZone,
   }).format(date);
+  byId("wedding-date").textContent =
+    formattedDate.replace(/^./u, (letter) => letter.toLocaleUpperCase("es-CO"));
 
   setMapLinks("ceremony", wedding.ceremony.address);
   setMapLinks("reception", wedding.reception.address);
@@ -170,7 +174,7 @@ function validateGuest(event) {
   const allowedGuests = new Set(invitedGuests.map(normalizeGuestName));
 
   if (!allowedGuests.has(normalizeGuestName(input.value))) {
-    error.textContent = "NOT FOUND 404!";
+    error.textContent = "404 NOT FOUND!";
     input.setAttribute("aria-invalid", "true");
     input.select();
     return;

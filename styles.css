@@ -872,10 +872,23 @@ summary:focus-visible {
 }
 
 .event-card {
-  padding: 1.75rem 1.2rem;
-  border: 1px solid rgb(25 54 75 / 7%);
-  background: var(--color-paper);
-  box-shadow: var(--shadow-card);
+  position: relative;
+  overflow: hidden;
+  padding: clamp(1.5rem, 5vw, 2.5rem);
+  border: 1px solid rgb(185 154 98 / 32%);
+  border-radius: 1.25rem;
+  background:
+    radial-gradient(ellipse at 50% 0, rgb(185 154 98 / 8%), transparent 44%),
+    var(--color-paper);
+  box-shadow: 0 1rem 2.5rem rgb(25 54 75 / 8%);
+}
+
+.event-card::before {
+  position: absolute;
+  height: 0.2rem;
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+  content: "";
+  inset: 0 0 auto;
 }
 
 .gift-note {
@@ -914,33 +927,49 @@ summary:focus-visible {
 }
 
 .event-card__icon {
+  display: grid;
+  width: 3.2rem;
+  height: 3.2rem;
+  margin: 0 auto 0.75rem;
+  border: 1px solid rgb(185 154 98 / 48%);
+  border-radius: 50%;
+  background: var(--color-ivory);
   color: var(--color-gold);
   font-family: var(--font-display);
-  font-size: 2.5rem;
+  font-size: 1.8rem;
   line-height: 1;
-}
-
-.event-card h3 {
-  margin: 0.25rem 0;
-  font-family: var(--font-display);
-  font-size: 1.65rem;
-  font-weight: 400;
+  place-items: center;
 }
 
 .event-card__time {
-  margin: 0.35rem 0 1rem;
-  color: var(--color-blue);
-  font-size: 0.9rem;
+  display: inline-block;
+  margin: 0 auto 0.9rem;
+  padding: 0.35rem 0.9rem;
+  border: 1px solid rgb(102 135 165 / 24%);
+  border-radius: 999px;
+  background: var(--color-blue-pale);
+  color: var(--color-navy);
+  font-size: 0.85rem;
   font-weight: 600;
+  letter-spacing: 0.035em;
 }
 
 .event-card__place {
-  margin: 0;
-  font-weight: 600;
+  max-width: 30rem;
+  margin: 0 auto;
+  color: var(--color-navy);
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 3.8vw, 1.8rem);
+  font-weight: 500;
+  line-height: 1.3;
+  text-wrap: balance;
 }
 
 .event-card__photo {
-  margin: 1rem 0;
+  margin: 1.35rem 0 1rem;
+  overflow: hidden;
+  border-radius: 0.8rem;
+  background: var(--color-blue-pale);
 }
 
 .event-card__photo img {
@@ -960,10 +989,11 @@ summary:focus-visible {
 }
 
 .event-card__address {
-  min-height: 3.2em;
-  margin: 0.3rem 0 1rem;
+  min-height: 0;
+  margin: 0.65rem 0 1rem;
   color: var(--color-muted);
-  font-size: 0.88rem;
+  font-size: 0.85rem;
+  line-height: 1.55;
 }
 
 .event-card__links {
@@ -976,7 +1006,17 @@ summary:focus-visible {
   display: inline-flex;
   min-height: 2.75rem;
   align-items: center;
-  padding: 0.4rem;
+  padding: 0.4rem 0.75rem;
+  border: 1px solid rgb(185 154 98 / 38%);
+  border-radius: 999px;
+  background: var(--color-ivory);
+  text-decoration: none;
+  transition: background-color 180ms ease, color 180ms ease;
+}
+
+.event-card__links .text-link:hover {
+  background: var(--color-navy);
+  color: var(--color-paper);
 }
 
 .text-link {
