@@ -21,8 +21,8 @@ const wedding = {
     address: "Calle 123, Mz 35-42, vía al Salado, barrio Santa Ana, Ibagué, Tolima",
   },
   dressCode: "Vestuario formal",
-  menDressCode: "Hombres: No usar traje azul, beige, ni corbatín.",
-  womenDressCode: "Mujeres: No usar vestido blanco.",
+  menDressCode: "No llevar traje azul ni beige, ni corbatín.",
+  womenDressCode: "No llevar vestido blanco.",
   parking: "Completa aquí la información sobre parqueadero.",
   children: "Completa aquí la información sobre la asistencia de niños.",
 };
@@ -183,18 +183,27 @@ function validateGuest(event) {
   const invitation = byId("invitation");
 
   startBackgroundMusic();
+  if (window.location.hash) {
+    window.history.replaceState(
+      window.history.state,
+      "",
+      `${window.location.pathname}${window.location.search}`,
+    );
+  }
+  document.documentElement.style.scrollBehavior = "auto";
+  window.scrollTo(0, 0);
+  document.documentElement.style.removeProperty("scroll-behavior");
   invitation.hidden = false;
   screen.classList.add("is-opening");
   window.setTimeout(() => {
     screen.hidden = true;
-    invitation.scrollIntoView({ behavior: "smooth", block: "start" });
-  }, 500);
+    byId("open-details").focus({ preventScroll: true });
+  }, window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 600);
 }
 
 function updateMusicButton(isPlaying) {
   const button = byId("music-toggle");
   button.hidden = false;
-  button.textContent = isPlaying ? "Ⅱ" : "♫";
   button.setAttribute("aria-label", `${isPlaying ? "Pausar" : "Reproducir"} música de fondo`);
   button.setAttribute("aria-pressed", String(isPlaying));
 }
@@ -240,8 +249,13 @@ function openDetailsEnvelope() {
   button.setAttribute("aria-expanded", "true");
   button.disabled = true;
   window.setTimeout(() => {
-    byId("detalles").scrollIntoView({ behavior: "smooth", block: "start" });
-  }, 1700);
+    byId("promesa").scrollIntoView({
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ? "auto"
+        : "smooth",
+      block: "start",
+    });
+  }, window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 1800);
 }
 
 function useHeroFallback() {

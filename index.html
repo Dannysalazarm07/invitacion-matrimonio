@@ -16,6 +16,42 @@
   <body>
     <!-- La invitación permanece oculta hasta que la persona abre el sobre. -->
     <section class="envelope-screen" id="envelope-screen" aria-labelledby="envelope-title">
+      <svg class="envelope-floral envelope-floral--top" viewBox="0 0 260 300" aria-hidden="true">
+        <path class="envelope-floral__stem" d="M17 282C74 228 84 159 145 91c24-27 44-48 94-73M61 235c-5-46-23-78-49-105m71 39c29-15 52-19 81-14m-36-65c-3-26-1-44 9-67m-34 147c-29-6-49-4-72 5m115-86c22 1 40 9 56 23"/>
+        <path class="envelope-floral__leaf" d="M15 130c28 2 46 16 50 39-25 1-44-11-50-39Zm43 102c-3-26 7-44 28-53 6 25-4 44-28 53Zm42-92c-1-25 10-42 32-49 3 24-8 41-32 49Zm39-42c1-24 14-39 36-43 0 24-12 39-36 43Zm-35 85c-21-15-28-35-19-56 21 14 28 33 19 56Zm63-75c18-17 39-20 58-8-17 19-37 22-58 8Z"/>
+        <g class="envelope-floral__flower envelope-floral__flower--blue">
+          <ellipse cx="173" cy="89" rx="13" ry="28"/>
+          <ellipse cx="173" cy="89" rx="13" ry="28" transform="rotate(60 173 89)"/>
+          <ellipse cx="173" cy="89" rx="13" ry="28" transform="rotate(120 173 89)"/>
+          <circle cx="173" cy="89" r="10"/>
+        </g>
+        <g class="envelope-floral__flower envelope-floral__flower--white">
+          <ellipse cx="94" cy="207" rx="10" ry="22"/>
+          <ellipse cx="94" cy="207" rx="10" ry="22" transform="rotate(60 94 207)"/>
+          <ellipse cx="94" cy="207" rx="10" ry="22" transform="rotate(120 94 207)"/>
+          <circle cx="94" cy="207" r="8"/>
+        </g>
+        <circle class="envelope-floral__accent" cx="29" cy="53" r="3"/>
+        <circle class="envelope-floral__accent" cx="211" cy="179" r="2.5"/>
+      </svg>
+      <svg class="envelope-floral envelope-floral--bottom" viewBox="0 0 260 300" aria-hidden="true">
+        <path class="envelope-floral__stem" d="M17 282C74 228 84 159 145 91c24-27 44-48 94-73M61 235c-5-46-23-78-49-105m71 39c29-15 52-19 81-14m-36-65c-3-26-1-44 9-67m-34 147c-29-6-49-4-72 5m115-86c22 1 40 9 56 23"/>
+        <path class="envelope-floral__leaf" d="M15 130c28 2 46 16 50 39-25 1-44-11-50-39Zm43 102c-3-26 7-44 28-53 6 25-4 44-28 53Zm42-92c-1-25 10-42 32-49 3 24-8 41-32 49Zm39-42c1-24 14-39 36-43 0 24-12 39-36 43Zm-35 85c-21-15-28-35-19-56 21 14 28 33 19 56Zm63-75c18-17 39-20 58-8-17 19-37 22-58 8Z"/>
+        <g class="envelope-floral__flower envelope-floral__flower--blue">
+          <ellipse cx="173" cy="89" rx="13" ry="28"/>
+          <ellipse cx="173" cy="89" rx="13" ry="28" transform="rotate(60 173 89)"/>
+          <ellipse cx="173" cy="89" rx="13" ry="28" transform="rotate(120 173 89)"/>
+          <circle cx="173" cy="89" r="10"/>
+        </g>
+        <g class="envelope-floral__flower envelope-floral__flower--white">
+          <ellipse cx="94" cy="207" rx="10" ry="22"/>
+          <ellipse cx="94" cy="207" rx="10" ry="22" transform="rotate(60 94 207)"/>
+          <ellipse cx="94" cy="207" rx="10" ry="22" transform="rotate(120 94 207)"/>
+          <circle cx="94" cy="207" r="8"/>
+        </g>
+        <circle class="envelope-floral__accent" cx="29" cy="53" r="3"/>
+        <circle class="envelope-floral__accent" cx="211" cy="179" r="2.5"/>
+      </svg>
       <div class="envelope-card">
         <div id="envelope-intro">
           <span class="eyebrow">Con mucho cariño</span>
@@ -51,7 +87,13 @@
       aria-label="Pausar música de fondo"
       aria-pressed="true"
       hidden
-    >Ⅱ</button>
+    >
+      <svg aria-hidden="true" viewBox="0 0 24 24">
+        <path d="M4 9v6h4l5 4V5L8 9H4Z"></path>
+        <path d="M16 9a5 5 0 0 1 0 6M18.5 6.5a9 9 0 0 1 0 11"></path>
+        <path class="music-toggle__mute-line" d="m4 4 16 16"></path>
+      </svg>
+    </button>
 
     <main id="invitation" class="invitation" hidden>
       <header class="hero" id="inicio">
@@ -70,6 +112,38 @@
           <p class="hero__city" id="wedding-city"></p>
           <div class="invite-envelope" id="invite-envelope">
             <span class="invite-envelope__letter" aria-hidden="true">
+              <svg class="invite-envelope__floral invite-envelope__floral--left" viewBox="0 0 260 300">
+                <path class="envelope-floral__stem" d="M17 282C74 228 84 159 145 91c24-27 44-48 94-73M61 235c-5-46-23-78-49-105m71 39c29-15 52-19 81-14m-36-65c-3-26-1-44 9-67m-34 147c-29-6-49-4-72 5m115-86c22 1 40 9 56 23"/>
+                <path class="envelope-floral__leaf" d="M15 130c28 2 46 16 50 39-25 1-44-11-50-39Zm43 102c-3-26 7-44 28-53 6 25-4 44-28 53Zm42-92c-1-25 10-42 32-49 3 24-8 41-32 49Zm39-42c1-24 14-39 36-43 0 24-12 39-36 43Zm-35 85c-21-15-28-35-19-56 21 14 28 33 19 56Zm63-75c18-17 39-20 58-8-17 19-37 22-58 8Z"/>
+                <g class="envelope-floral__flower envelope-floral__flower--blue">
+                  <ellipse cx="173" cy="89" rx="13" ry="28"/>
+                  <ellipse cx="173" cy="89" rx="13" ry="28" transform="rotate(60 173 89)"/>
+                  <ellipse cx="173" cy="89" rx="13" ry="28" transform="rotate(120 173 89)"/>
+                  <circle cx="173" cy="89" r="10"/>
+                </g>
+                <g class="envelope-floral__flower envelope-floral__flower--white">
+                  <ellipse cx="94" cy="207" rx="10" ry="22"/>
+                  <ellipse cx="94" cy="207" rx="10" ry="22" transform="rotate(60 94 207)"/>
+                  <ellipse cx="94" cy="207" rx="10" ry="22" transform="rotate(120 94 207)"/>
+                  <circle cx="94" cy="207" r="8"/>
+                </g>
+              </svg>
+              <svg class="invite-envelope__floral invite-envelope__floral--right" viewBox="0 0 260 300">
+                <path class="envelope-floral__stem" d="M17 282C74 228 84 159 145 91c24-27 44-48 94-73M61 235c-5-46-23-78-49-105m71 39c29-15 52-19 81-14m-36-65c-3-26-1-44 9-67m-34 147c-29-6-49-4-72 5m115-86c22 1 40 9 56 23"/>
+                <path class="envelope-floral__leaf" d="M15 130c28 2 46 16 50 39-25 1-44-11-50-39Zm43 102c-3-26 7-44 28-53 6 25-4 44-28 53Zm42-92c-1-25 10-42 32-49 3 24-8 41-32 49Zm39-42c1-24 14-39 36-43 0 24-12 39-36 43Zm-35 85c-21-15-28-35-19-56 21 14 28 33 19 56Zm63-75c18-17 39-20 58-8-17 19-37 22-58 8Z"/>
+                <g class="envelope-floral__flower envelope-floral__flower--blue">
+                  <ellipse cx="173" cy="89" rx="13" ry="28"/>
+                  <ellipse cx="173" cy="89" rx="13" ry="28" transform="rotate(60 173 89)"/>
+                  <ellipse cx="173" cy="89" rx="13" ry="28" transform="rotate(120 173 89)"/>
+                  <circle cx="173" cy="89" r="10"/>
+                </g>
+                <g class="envelope-floral__flower envelope-floral__flower--white">
+                  <ellipse cx="94" cy="207" rx="10" ry="22"/>
+                  <ellipse cx="94" cy="207" rx="10" ry="22" transform="rotate(60 94 207)"/>
+                  <ellipse cx="94" cy="207" rx="10" ry="22" transform="rotate(120 94 207)"/>
+                  <circle cx="94" cy="207" r="8"/>
+                </g>
+              </svg>
               <span class="invite-envelope__names">Paula <span>&amp;</span> Daniel</span>
             </span>
             <span class="invite-envelope__body" aria-hidden="true"></span>
@@ -80,21 +154,39 @@
               id="open-details"
               type="button"
               aria-label="Abrir la invitación de Paula y Daniel"
-              aria-controls="detalles"
+              aria-controls="promesa"
               aria-expanded="false"
             >P <span aria-hidden="true">&amp;</span> D</button>
             <span class="invite-envelope__label">Abrir invitación</span>
           </div>
         </div>
         <a class="scroll-cue" href="#cuenta-regresiva" aria-label="Desplazarse a la cuenta regresiva">
-          <span aria-hidden="true">↓</span>
+          <svg aria-hidden="true" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="8.5"></circle>
+            <path d="M12 7v5l3.25 2"></path>
+          </svg>
         </a>
       </header>
 
+      <section class="section scripture" id="promesa" aria-labelledby="scripture-title">
+        <p class="eyebrow">Una promesa para toda la vida</p>
+        <h2 class="section-title" id="scripture-title">Unidos en amor</h2>
+        <blockquote class="scripture__quote">
+          <span class="scripture__mark" aria-hidden="true">“</span>
+          <p>
+            Pero al principio de la creación, varón y hembra los hizo Dios.
+            Por esto dejará el hombre á su padre y á su madre, y se juntará á su mujer.
+            Y los que eran dos, serán hechos una carne: así que no son ya más dos,
+            sino una carne. Pues lo que Dios juntó, no lo aparte el hombre.
+          </p>
+          <footer>Marcos 10:6-9 <span>·</span> Reina-Valera 1909</footer>
+        </blockquote>
+      </section>
+
       <section class="section section--soft" id="detalles" aria-labelledby="details-title">
-        <p class="eyebrow">Nos encantará celebrar contigo</p>
-        <h2 class="section-title" id="details-title">Ceremonia y recepción</h2>
-        <div class="event-grid">
+        <p class="eyebrow">El comienzo de nuestra historia</p>
+        <h2 class="section-title" id="details-title">Ceremonia</h2>
+        <div class="event-grid event-grid--single">
           <article class="event-card">
             <span class="event-card__icon" aria-hidden="true">♡</span>
             <h3>Ceremonia</h3>
@@ -119,6 +211,13 @@
               </a>
             </div>
           </article>
+        </div>
+      </section>
+
+      <section class="section section--soft reception" aria-labelledby="reception-title">
+        <p class="eyebrow">Y lo celebraremos contigo</p>
+        <h2 class="section-title" id="reception-title">Recepción</h2>
+        <div class="event-grid event-grid--single">
           <article class="event-card">
             <span class="event-card__icon" aria-hidden="true">✧</span>
             <h3>Recepción</h3>
@@ -175,8 +274,34 @@
         <p class="eyebrow">Para celebrar con estilo</p>
         <h2 class="section-title" id="dress-title">Código de vestuario</h2>
         <p class="dress-code" id="dress-code"></p>
-        <p class="dress-code dress-code--men" id="men-dress-code"></p>
-        <p class="dress-code dress-code--women" id="women-dress-code"></p>
+        <div class="attire-grid">
+          <article class="attire-card" aria-labelledby="men-attire-title">
+            <span class="attire-card__icon attire-card__icon--suit" aria-hidden="true">
+              <svg viewBox="0 0 64 64" fill="none">
+                <path class="attire-icon__suit" d="m23 8 8 4h2l8-4 12 8-5 14-5-3 1 29H20l1-29-5 3-5-14 12-8Z" />
+                <path class="attire-icon__shirt" d="m24 9 8 9 8-9-3 22h-10L24 9Z" />
+                <path class="attire-icon__lapel" d="m23 9 9 9-6 12-5-8 2-13Zm18 0-9 9 6 12 5-8-2-13Z" />
+                <path class="attire-icon__bow-tie" d="m31 19 1 2 1-2 5-3-1 6 1 5-5-3-1-2-1 2-5 3 1-5-1-6 5 3Z" />
+                <path class="attire-icon__suit-detail" d="m20 30 6 2m18-2-6 2M32 33v2m0 5v2m0 5v2m0 5v1M42 38h3" />
+              </svg>
+            </span>
+            <h3 id="men-attire-title">Para ellos</h3>
+            <p id="men-dress-code"></p>
+          </article>
+          <article class="attire-card" aria-labelledby="women-attire-title">
+            <span class="attire-card__icon attire-card__icon--dress" aria-hidden="true">
+              <svg viewBox="0 0 64 64" fill="none">
+                <path class="attire-icon__dress-skirt" d="m27 27 5 2 5-2 16 28H11l16-28Z" />
+                <path class="attire-icon__dress-bodice" d="M24 9h5l3 5 3-5h5l2 18-10 3-10-3 2-18Z" />
+                <path class="attire-icon__dress-neckline" d="m24 12 1 6c2 1 5 1 7-2 2 3 5 3 7 2l1-6" />
+                <path class="attire-icon__dress-detail" d="M22 28h20M17 45h30m-15-15v19m-8-3-5 7m21-7 5 7" />
+                <path class="attire-icon__dress-waist" d="M27 29h10" />
+              </svg>
+            </span>
+            <h3 id="women-attire-title">Para ellas</h3>
+            <p id="women-dress-code"></p>
+          </article>
+        </div>
       </section>
 
       <section class="countdown section" id="cuenta-regresiva" aria-labelledby="countdown-title">
