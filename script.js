@@ -21,11 +21,12 @@ const wedding = {
     address: "Calle 123, Mz 35-42, vía al Salado, barrio Santa Ana, Ibagué, Tolima",
   },
   dressCode: "Vestuario formal",
-  menDressCode: "No llevar traje azul ni beige, ni corbatín",
+  menDressCode: "No llevar traje azul, beige ni corbatín",
   womenDressCode: "No llevar vestido blanco",
   parking: "Sí, habrá parqueaderos disponibles para carros y motocicletas, tanto en el lugar de la ceremonia como en el de la celebración.",
-  children: "Preferiblemente no, por los horarios del evento y las responsabilidades adicionales que implicaría para los papás. Agradecemos mucho su comprensión.",
+  children: "Preferiblemente no, por los horarios del evento y las responsabilidades adicionales que implicaría para los papás. Agradecemos mucho tu comprensión.",
   arrival: "Recomendamos llegar al menos 15 minutos antes de la hora indicada.",
+  rsvpDeadline: "Puedes confirmarnos tu asistencia hasta el 1 de diciembre. Si para esa fecha no hemos recibido tu confirmación, entenderemos que no podrás acompañarnos ese día.",
 };
 
 const invitedGuests = ["Maria", "Carlos", "Samuel", "Viviana", "Miguel"];
@@ -48,6 +49,7 @@ function populateInvitation() {
   byId("parking-answer").textContent = wedding.parking;
   byId("children-answer").textContent = wedding.children;
   byId("arrival-answer").textContent = wedding.arrival;
+  byId("rsvp-deadline-answer").textContent = wedding.rsvpDeadline;
 
   const date = new Date(wedding.date);
   if (Number.isNaN(date.getTime())) {
