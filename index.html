@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f7f4ed">
+    <meta
+      name="description"
+      content="Una invitación muy especial. Acompáñanos a celebrar nuestro matrimonio."
+    >
+    <title>Una invitación muy especial</title>
+    <link rel="preload" as="image" href="fotos/novios.webp" fetchpriority="high">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <!-- La invitación permanece oculta hasta que la persona abre el sobre. -->
+    <section class="envelope-screen" id="envelope-screen" aria-labelledby="envelope-title">
+      <div class="envelope-card">
+        <div id="envelope-intro">
+          <span class="eyebrow">Con mucho cariño</span>
+          <span class="envelope-icon" aria-hidden="true">✉</span>
+          <h1 id="envelope-title">Tenemos una invitación para ti</h1>
+          <p>Nos haría muy felices compartir contigo un día inolvidable.</p>
+          <button class="button button--gold" id="open-invitation" type="button">
+            Abrir invitación
+          </button>
+        </div>
+        <form class="guest-gate" id="guest-gate" hidden>
+          <label class="eyebrow" for="guest-name">¿Cuál es tu nombre?</label>
+          <input
+            class="guest-gate__input"
+            id="guest-name"
+            name="guest-name"
+            type="text"
+            autocomplete="name"
+            autocapitalize="words"
+            required
+          >
+          <p class="guest-gate__error" id="guest-error" role="alert" aria-live="polite"></p>
+          <button class="button button--gold" type="submit">Continuar</button>
+        </form>
+      </div>
+    </section>
+
+    <main id="invitation" class="invitation" hidden>
+      <header class="hero" id="inicio">
+        <img
+          class="hero__photo"
+          id="couple-photo"
+          src="fotos/novios.webp"
+          alt="Fotografía de los novios"
+          fetchpriority="high"
+        >
+        <div class="hero__content">
+          <p class="eyebrow">¡Nos casamos!</p>
+          <h1 class="hero__names"><span id="couple-names">Paula y Daniel</span></h1>
+          <span class="hero__divider" aria-hidden="true"></span>
+          <p class="hero__date" id="wedding-date"></p>
+          <p class="hero__city" id="wedding-city"></p>
+          <div class="invite-envelope" id="invite-envelope">
+            <span class="invite-envelope__letter" aria-hidden="true">
+              <span class="invite-envelope__names">Paula <span>&amp;</span> Daniel</span>
+            </span>
+            <span class="invite-envelope__body" aria-hidden="true"></span>
+            <span class="invite-envelope__pocket" aria-hidden="true"></span>
+            <span class="invite-envelope__flap" aria-hidden="true"></span>
+            <button
+              class="invite-envelope__seal"
+              id="open-details"
+              type="button"
+              aria-label="Abrir la invitación de Paula y Daniel"
+              aria-controls="detalles"
+              aria-expanded="false"
+            >P <span aria-hidden="true">&amp;</span> D</button>
+            <span class="invite-envelope__label">Abrir invitación</span>
+          </div>
+        </div>
+        <a class="scroll-cue" href="#cuenta-regresiva" aria-label="Desplazarse a la cuenta regresiva">
+          <span aria-hidden="true">↓</span>
+        </a>
+      </header>
+
+      <section class="section section--soft" id="detalles" aria-labelledby="details-title">
+        <p class="eyebrow">Nos encantará celebrar contigo</p>
+        <h2 class="section-title" id="details-title">Ceremonia y recepción</h2>
+        <div class="event-grid">
+          <article class="event-card">
+            <span class="event-card__icon" aria-hidden="true">♡</span>
+            <h3>Ceremonia</h3>
+            <p class="event-card__time" id="ceremony-time"></p>
+            <p class="event-card__place" id="ceremony-place"></p>
+            <p class="event-card__address" id="ceremony-address"></p>
+            <figure class="event-card__photo">
+              <img
+                src="fotos/casablanca-entrada.webp"
+                alt="Entrada principal de Casablanca Casa de Retiro"
+                loading="lazy"
+                decoding="async"
+              >
+              <figcaption>Entrada de Casablanca Casa de Retiro</figcaption>
+            </figure>
+            <div class="event-card__links">
+              <a class="text-link" id="ceremony-maps" target="_blank" rel="noopener noreferrer">
+                Google Maps <span aria-hidden="true">↗</span>
+              </a>
+              <a class="text-link" id="ceremony-waze" target="_blank" rel="noopener noreferrer">
+                Waze <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+          <article class="event-card">
+            <span class="event-card__icon" aria-hidden="true">✧</span>
+            <h3>Recepción</h3>
+            <p class="event-card__time" id="reception-time"></p>
+            <p class="event-card__place" id="reception-place"></p>
+            <p class="event-card__address" id="reception-address"></p>
+            <figure class="event-card__photo">
+              <img
+                src="fotos/santa-ana-entrada.webp"
+                alt="Entrada principal de la sede deportiva Santa Ana"
+                loading="lazy"
+                decoding="async"
+              >
+              <figcaption>Entrada de la sede deportiva Santa Ana</figcaption>
+            </figure>
+            <div class="event-card__links">
+              <a class="text-link" id="reception-maps" target="_blank" rel="noopener noreferrer">
+                Google Maps <span aria-hidden="true">↗</span>
+              </a>
+              <a class="text-link" id="reception-waze" target="_blank" rel="noopener noreferrer">
+                Waze <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section rsvp" id="rsvp" aria-labelledby="rsvp-title">
+        <p class="eyebrow">Tu compañía es nuestro mejor regalo</p>
+        <h2 class="section-title" id="rsvp-title">¿Nos acompañas?</h2>
+        <p>Por favor, confírmanos tu asistencia. ¡Estamos contando los días para verte!</p>
+        <div class="rsvp__contacts" id="rsvp-contacts"></div>
+      </section>
+
+      <section class="section section--soft" id="regalos" aria-labelledby="gifts-title">
+        <p class="eyebrow">Un detalle para nosotros</p>
+        <h2 class="section-title" id="gifts-title">Lluvia de sobres</h2>
+        <div class="gift-note">
+          <svg class="gift-note__icon" viewBox="0 0 64 64" aria-hidden="true">
+            <rect x="8" y="16" width="48" height="34" rx="2" fill="#fffdf8" stroke="currentColor" stroke-width="1.5"/>
+            <path d="m9 18 23 18 23-18M9 49l17-15m29 15L38 34" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="32" cy="34" r="7" fill="#f7f4ed" stroke="#b99a62" stroke-width="1.5"/>
+            <path d="M32 37s-3.5-2-3.5-4.1a1.8 1.8 0 0 1 3.5-.6 1.8 1.8 0 0 1 3.5.6C35.5 35 32 37 32 37Z" fill="#b99a62"/>
+          </svg>
+          <p class="gift-note__message">
+            Tu presencia es nuestro mejor regalo. Si deseas tener un detalle con nosotros,
+            recibiremos con mucho cariño un sobre con dinero durante la celebración.
+          </p>
+          <p class="gift-note__signoff">¡Gracias por compartir este día tan especial!</p>
+        </div>
+      </section>
+
+      <section class="section" id="vestuario" aria-labelledby="dress-title">
+        <p class="eyebrow">Para celebrar con estilo</p>
+        <h2 class="section-title" id="dress-title">Código de vestuario</h2>
+        <p class="dress-code" id="dress-code"></p>
+        <p class="dress-code dress-code--men" id="men-dress-code"></p>
+        <p class="dress-code dress-code--women" id="women-dress-code"></p>
+      </section>
+
+      <section class="countdown section" id="cuenta-regresiva" aria-labelledby="countdown-title">
+        <p class="eyebrow">La cuenta regresiva comienza</p>
+        <h2 class="section-title" id="countdown-title">Cada vez falta menos</h2>
+        <div class="countdown__grid" aria-label="Tiempo restante para la boda">
+          <div class="countdown__unit"><span id="days">--</span><small>días</small></div>
+          <div class="countdown__unit"><span id="hours">--</span><small>horas</small></div>
+          <div class="countdown__unit"><span id="minutes">--</span><small>minutos</small></div>
+          <div class="countdown__unit"><span id="seconds">--</span><small>segundos</small></div>
+        </div>
+        <p class="countdown__message" id="countdown-message" aria-live="polite"></p>
+      </section>
+
+      <section class="section section--soft faq" id="preguntas" aria-labelledby="faq-title">
+        <p class="eyebrow">Información útil</p>
+        <h2 class="section-title" id="faq-title">Preguntas frecuentes</h2>
+        <details>
+          <summary>¿Hay parqueadero?</summary>
+          <p id="parking-answer"></p>
+        </details>
+        <details>
+          <summary>¿Pueden asistir niños?</summary>
+          <p id="children-answer"></p>
+        </details>
+        <details>
+          <summary>¿A qué hora debo llegar?</summary>
+          <p>Te recomendamos llegar unos minutos antes de la hora indicada para la ceremonia.</p>
+        </details>
+      </section>
+
+      <footer class="footer">
+        <p>Con amor,</p>
+        <p class="footer__names" id="footer-names"></p>
+        <a class="text-link" href="#inicio">Volver al inicio ↑</a>
+      </footer>
+    </main>
+  </body>
+</html>
