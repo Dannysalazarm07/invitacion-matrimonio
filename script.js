@@ -279,7 +279,7 @@ function openDetailsEnvelope() {
         : "smooth",
       block: "start",
     });
-  }, window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 1800);
+  }, window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 1500);
 }
 
 function useHeroFallback() {

@@ -1092,6 +1092,10 @@ summary:focus-visible {
   object-position: center 56%;
 }
 
+#detalles .event-card__photo img {
+  object-position: center 18%;
+}
+
 .event-card__photo figcaption {
   margin-top: 0.4rem;
   color: var(--color-muted);
