@@ -170,8 +170,10 @@
         </div>
         <a class="scroll-cue" href="#cuenta-regresiva" aria-label="Desplazarse a la cuenta regresiva">
           <svg aria-hidden="true" viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="8.5"></circle>
-            <path d="M12 7v5l3.25 2"></path>
+            <circle class="scroll-cue__face" cx="12" cy="12" r="9"></circle>
+            <path class="scroll-cue__ticks" d="M12 5.5v1.2m0 10.6v1.2m6.5-6.5h-1.2m-10.6 0H5.5"></path>
+            <path class="scroll-cue__hands" d="M12 8v4l2.7 1.7"></path>
+            <circle class="scroll-cue__center" cx="12" cy="12" r=".8"></circle>
           </svg>
         </a>
       </header>
@@ -197,7 +199,12 @@
         <h2 class="section-title" id="details-title">Nuestra ceremonia</h2>
         <div class="event-grid event-grid--single">
           <article class="event-card">
-            <span class="event-card__icon" aria-hidden="true">♡</span>
+            <span class="event-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 40 40" fill="none" focusable="false">
+                <path d="M20 2.5v6m-2.5-3.5h5M17 20v-6l3-4 3 4v6M5 23.5 20 15l15 8.5M8 22v13h24V22M16 35V29a4 4 0 0 1 8 0v6" />
+                <path d="M12 26v4m-1.5-2h3m14-2v4m-1.5-2h3M17 18h6" />
+              </svg>
+            </span>
             <p class="event-card__time" id="ceremony-time"></p>
             <h3 class="event-card__place" id="ceremony-place"></h3>
             <p class="event-card__address" id="ceremony-address"></p>
@@ -227,7 +234,12 @@
         <h2 class="section-title" id="reception-title">La celebración</h2>
         <div class="event-grid event-grid--single">
           <article class="event-card">
-            <span class="event-card__icon" aria-hidden="true">✧</span>
+            <span class="event-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 40 40" fill="none" focusable="false">
+                <path d="M6 7h11l-1.2 7a4.3 4.3 0 0 1-8.6 0L6 7Zm5.5 11v10m-4 0h8m7-21h11l-1.2 7a4.3 4.3 0 0 1-8.6 0L22 7Zm5.5 11v10m-4 0h8" />
+                <path d="M19 5V3m-2 4-1.5-1.5m5.5 1.5L22.5 5M8 11h7m9 0h7" />
+              </svg>
+            </span>
             <p class="event-card__time" id="reception-time"></p>
             <h3 class="event-card__place" id="reception-place"></h3>
             <p class="event-card__address" id="reception-address"></p>
@@ -255,7 +267,7 @@
       <section class="section rsvp" id="rsvp" aria-labelledby="rsvp-title">
         <p class="eyebrow">Tu compañía es nuestro mejor regalo</p>
         <h2 class="section-title" id="rsvp-title">¿Nos acompañas?</h2>
-        <p>Por favor, confírmanos tu asistencia. ¡Estamos contando los días para verte!</p>
+        <p>Al escribirnos, indícanos si podrás acompañarnos y cuántas personas asistirán en total, respetando los cupos de tu invitación. Si no puedes asistir, también agradecemos que nos avises.</p>
         <div class="rsvp__contacts" id="rsvp-contacts"></div>
       </section>
 
@@ -314,6 +326,12 @@
       <section class="countdown section" id="cuenta-regresiva" aria-labelledby="countdown-title">
         <p class="eyebrow">La cuenta regresiva comienza</p>
         <h2 class="section-title" id="countdown-title">Cada vez falta menos</h2>
+        <svg class="countdown__ornament" viewBox="0 0 48 64" aria-hidden="true" focusable="false">
+          <path class="countdown__ornament-frame" d="M7 5.5h34M7 58.5h34M11 7c0 11 13 13.5 13 25S11 46 11 57M37 7c0 11-13 13.5-13 25s13 14 13 25" />
+          <path class="countdown__ornament-sand" d="M14 10h20c-.8 5-4.5 8.1-10 11-5.5-2.9-9.2-6-10-11Zm10 26c-5.5 3.5-9.2 7.2-10 13h20c-.8-5.8-4.5-9.5-10-13Z" />
+          <path class="countdown__ornament-frame" d="M21.5 32h5M15 55h18" />
+          <circle class="countdown__ornament-detail" cx="24" cy="29.5" r="1.1" />
+        </svg>
         <div class="countdown__grid" aria-label="Tiempo restante para la boda">
           <div class="countdown__unit"><span id="days">--</span><small>días</small></div>
           <div class="countdown__unit"><span id="hours">--</span><small>horas</small></div>
@@ -333,6 +351,14 @@
         <details>
           <summary>¿Pueden asistir niños?</summary>
           <p id="children-answer"></p>
+        </details>
+        <details>
+          <summary>¿Cómo llego de la ceremonia a la celebración?</summary>
+          <p id="transportation-answer"></p>
+        </details>
+        <details>
+          <summary>¿Hasta qué hora será la celebración?</summary>
+          <p id="celebration-end-answer"></p>
         </details>
         <details>
           <summary>¿A qué hora debo llegar?</summary>

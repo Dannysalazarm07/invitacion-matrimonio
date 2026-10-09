@@ -9,7 +9,6 @@ const wedding = {
     { phone: "573182899149", display: "318 289 9149" },
     { phone: "573043902022", display: "304 390 2022" },
   ],
-  rsvpMessage: "¡Hola! Confirmo mi asistencia a su matrimonio. ¡Muchas felicidades!",
   ceremony: {
     time: "3:30 p. m.",
     place: "Casablanca Casa de Retiro",
@@ -26,7 +25,9 @@ const wedding = {
   parking: "Sí, habrá parqueaderos disponibles para carros y motocicletas, tanto en el lugar de la ceremonia como en el de la celebración.",
   children: "Preferiblemente no, por los horarios del evento y las responsabilidades adicionales que implicaría para los papás. Agradecemos mucho tu comprensión.",
   arrival: "Recomendamos llegar al menos 15 minutos antes de la hora indicada.",
-  rsvpDeadline: "Puedes confirmarnos tu asistencia hasta el 1 de diciembre. Si para esa fecha no hemos recibido tu confirmación, entenderemos que no podrás acompañarnos ese día.",
+  celebrationEnd: "La celebración terminará a las 3:00 a. m. Para regresar, te recomendamos tomar un taxi o contar con un conductor elegido si vas a consumir bebidas alcohólicas. Queremos que todos regresen a casa de manera segura.",
+  rsvpDeadline: "Agradecemos que nos confirmes antes del 1 de diciembre de 2026, tanto si podrás acompañarnos como si no. Así podremos organizarlo todo con mucho cariño.",
+  transportation: "Los lugares están a unos 20 minutos en carro, aproximadamente. Cada invitado deberá trasladarse por sus propios medios desde Casablanca hasta la sede Santa Ana; no habrá transporte organizado.",
 };
 
 const invitedGuests = ["Maria", "Carlos", "Samuel", "Viviana", "Miguel"];
@@ -49,7 +50,9 @@ function populateInvitation() {
   byId("parking-answer").textContent = wedding.parking;
   byId("children-answer").textContent = wedding.children;
   byId("arrival-answer").textContent = wedding.arrival;
+  byId("celebration-end-answer").textContent = wedding.celebrationEnd;
   byId("rsvp-deadline-answer").textContent = wedding.rsvpDeadline;
+  byId("transportation-answer").textContent = wedding.transportation;
 
   const date = new Date(wedding.date);
   if (Number.isNaN(date.getTime())) {
@@ -83,7 +86,6 @@ function setMapLinks(eventName, address) {
 
 function configureRsvp() {
   const contacts = byId("rsvp-contacts");
-  const message = encodeURIComponent(wedding.rsvpMessage);
 
   wedding.rsvpContacts.forEach(({ phone, display }) => {
     const link = document.createElement("a");
@@ -93,7 +95,8 @@ function configureRsvp() {
     const label = document.createElement("span");
 
     link.className = "button button--green";
-    link.href = `https://wa.me/${phone}?text=${message}`;
+    link.href = `https://wa.me/${phone}?text=${encodeURIComponent(buildRsvpMessage())}`;
+    link.dataset.phone = phone;
     link.target = "_blank";
     link.rel = "noopener noreferrer";
     icon.classList.add("button__icon");
@@ -118,6 +121,20 @@ function configureRsvp() {
     label.textContent = `Confirmar al ${display}`;
     link.append(icon, label);
     contacts.append(link);
+  });
+}
+
+function buildRsvpMessage(guestName = "[nombre de la persona invitada]") {
+  return [
+    `¡Hola! Soy ${guestName}. Sobre la invitación de ${wedding.names}:`,
+    "Mi respuesta es: [Sí asistiré / No podré asistir].",
+    "Si asistiré, seremos [número] persona(s) en total, incluyéndome y respetando los cupos de mi invitación.",
+  ].join("\n");
+}
+
+function personalizeRsvpLinks(guestName) {
+  byId("rsvp-contacts").querySelectorAll("a").forEach((link) => {
+    link.href = `https://wa.me/${link.dataset.phone}?text=${encodeURIComponent(buildRsvpMessage(guestName))}`;
   });
 }
 
@@ -184,6 +201,7 @@ function validateGuest(event) {
 
   input.removeAttribute("aria-invalid");
   error.textContent = "";
+  personalizeRsvpLinks(input.value.trim());
 
   const screen = byId("envelope-screen");
   const invitation = byId("invitation");
