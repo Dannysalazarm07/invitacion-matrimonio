@@ -27,7 +27,7 @@ const wedding = {
   arrival: "Recomendamos llegar al menos 15 minutos antes de la hora indicada.",
   celebrationEnd: "La celebración terminará a las 3:00 a. m. Para regresar, te recomendamos tomar un taxi o contar con un conductor elegido si vas a consumir bebidas alcohólicas. Queremos que todos regresen a casa de manera segura.",
   rsvpDeadline: "Agradecemos que nos confirmes antes del 1 de diciembre de 2026, tanto si podrás acompañarnos como si no. Así podremos organizarlo todo con mucho cariño.",
-  transportation: "Los lugares están a unos 20 minutos en carro, aproximadamente. Cada invitado deberá trasladarse por sus propios medios desde Casablanca hasta la sede Santa Ana; no habrá transporte organizado.",
+  transportation: "Los lugares están a unos 10 minutos en carro, aproximadamente. Cada invitado deberá trasladarse por sus propios medios desde Casablanca hasta la sede Santa Ana; no habrá transporte organizado.",
 };
 
 const invitedGuests = ["Maria", "Carlos", "Samuel", "Viviana", "Miguel"];
