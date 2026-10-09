@@ -128,7 +128,6 @@ function buildRsvpMessage(guestName = "[nombre de la persona invitada]") {
   return [
     `¡Hola! Soy ${guestName}. Sobre la invitación de ${wedding.names}:`,
     "Mi respuesta es: [Sí asistiré / No podré asistir].",
-    "Si asistiré, seremos [número] persona(s) en total, incluyéndome y respetando los cupos de mi invitación.",
   ].join("\n");
 }
 
