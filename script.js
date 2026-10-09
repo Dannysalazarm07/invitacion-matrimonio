@@ -249,7 +249,7 @@ function replayBackgroundMusic() {
 function startBackgroundMusic() {
   const music = byId("background-music");
 
-  music.volume = 0.12;
+  music.volume = 0.07;
   music.play().then(
     () => updateMusicButton(true),
     reportMusicError,
