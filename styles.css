@@ -38,6 +38,11 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+body.page-locked {
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
 body,
 button,
 a {
@@ -669,15 +674,31 @@ summary:focus-visible {
 .invite-envelope__label {
   position: absolute;
   z-index: 6;
-  right: 0;
-  bottom: -2.2rem;
-  left: 0;
-  color: #fff4d6;
-  font-size: 0.84rem;
+  right: auto;
+  bottom: -2.35rem;
+  left: 50%;
+  display: flex;
+  width: max-content;
+  max-width: calc(100vw - 2rem);
+  align-items: center;
+  gap: 0.55rem;
+  transform: translateX(-50%);
+  color: #f0d99f;
+  font-size: 0.75rem;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.07em;
   text-shadow: 0 1px 8px rgb(8 26 42 / 90%);
   transition: opacity 200ms ease, transform 200ms ease;
+  white-space: nowrap;
+}
+
+.invite-envelope__label::before,
+.invite-envelope__label::after {
+  width: 0.85rem;
+  height: 1px;
+  flex: 0 0 auto;
+  background: rgb(240 217 159 / 68%);
+  content: "";
 }
 
 .invite-envelope:hover .invite-envelope__flap {
@@ -704,7 +725,7 @@ summary:focus-visible {
 }
 
 .invite-envelope.is-opening .invite-envelope__label {
-  transform: translateY(-0.25rem);
+  transform: translate(-50%, -0.25rem);
   opacity: 0;
 }
 
@@ -738,6 +759,11 @@ summary:focus-visible {
   place-items: center;
   text-decoration: none;
   transition: background-color 180ms ease, box-shadow 180ms ease;
+}
+
+body.page-locked .scroll-cue {
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .scroll-cue:hover,

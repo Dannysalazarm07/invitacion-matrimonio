@@ -30,7 +30,14 @@ const wedding = {
   transportation: "Los lugares están a unos 10 minutos en carro, aproximadamente. Cada invitado deberá trasladarse por sus propios medios desde Casablanca hasta la sede Santa Ana; no habrá transporte organizado.",
 };
 
-const invitedGuests = ["Maria", "Carlos", "Samuel", "Viviana", "Miguel"];
+const invitedGuests = JSON.parse(
+  new TextDecoder("utf-8").decode(
+    Uint8Array.from(
+      atob("WyJEaW9zIiwiRXZhIiwiSm9zZSBEYW5pZWwiLCJKaG9uIEFsZXhhbmRlciIsIkNhcmxvcyBBbmRyw6lzIiwiRWxpemFiZXRoIiwiTWFyaW5lbGJhIiwiQWlkZSIsIkhlbnJ5IEplbnJ5IEhlbnJpIEplbnJpIiwiSnVsaWV0aCBUYXRpYW5hIiwiTmFuYSBNYXJpYSBHbGV5ZGlzIiwiTGliYXJkbyIsIk5vZWwiLCJBbmdlbCIsIlNhbXVlbCBBbnRvbmlvIiwiTHV6IERhcnkiLCJWaXZpYW5hIEdpbm5ldGgiLCJNaWd1ZWwgQW5kcsOpcyIsIklsZGEiLCJKZW5uaSBZZW5pIEplbm55IEplbmkgWWVubmkiLCJFbHNhIiwiSXZhbiBEYXLDrW8iLCJNYXJpYSBkZWwgQ2FybWVuIiwiTHVpcyBBbGJlcnRvIiwiTHVpc2EgTWFyaWEiLCJDYW1pbG8gQWxiZXJ0byIsIk1pcmlhbSIsIkNhcm1lbiIsIkd1aWRvIEZlcm5hbmRvIiwiTWFnYWxseSIsIllvbGFuZGEiLCJFZHVhcmRvIiwiRGFuaWVsIEVkdWFyZG8iLCJKb3NlIEx1aXMiLCJDYXJtZW4gUmFxdWVsIiwiR2lvdmFueSIsIlNlYmFzdGlhbiIsIkxpbmEgQWxlamFuZHJhIiwiSnVhbiBDYXJsb3MiLCJNYXJ0aGEiLCJSYcO6bCBFcm5lc3RvIiwiRGl2YSIsIlJhw7psIEFsYmVydG8iLCJDbGF1ZGlhIiwiTWFyaWEgZGVsIFBpbGFyIiwiRWxtZXIgSmVhbiIsIkdpb3Zhbm5hIiwiSnVhbiBDYXJsb3MiLCJEYW5pZWxhIiwiSnVhbiBGZWxpcGUiLCJKb3NlIEJlcm5hcmRvIiwiTmF0YWxpYSIsIkdlcm3DoW4iLCJHbG9yaWEiLCJOb3JtYSIsIlJvc21lcnkiLCJFc3RlZmFuw61hIiwiTmljb2xhcyIsIk5hdGhhbGlhIE1hcmNlbGEiLCJBdXJhIiwiQW5kcsOpcyBNYXVyaWNpbyIsIkp1bGlhbmEiLCJDcmlzdGlhbiBNYXVyaWNpbyJd"),
+      (character) => character.charCodeAt(0),
+    ),
+  ),
+);
 const byId = (id) => document.getElementById(id);
 
 // Actualiza los textos y crea enlaces de mapas a partir de las direcciones configuradas.
@@ -179,9 +186,27 @@ function openEnvelope() {
 function normalizeGuestName(name) {
   return name
     .trim()
+    .replace(/\s+/g, " ")
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
     .toLocaleLowerCase("es");
+}
+
+function isInvitedGuest(name) {
+  const normalizedName = normalizeGuestName(name);
+  const nameParts = normalizedName.split(" ").filter(Boolean);
+
+  if (nameParts.length === 0) {
+    return false;
+  }
+
+  return invitedGuests.some((guest) => {
+    const guestParts = normalizeGuestName(guest).split(" ");
+
+    return guestParts.some((_, start) =>
+      nameParts.every((part, offset) => guestParts[start + offset] === part),
+    );
+  });
 }
 
 function validateGuest(event) {
@@ -189,10 +214,9 @@ function validateGuest(event) {
 
   const input = byId("guest-name");
   const error = byId("guest-error");
-  const allowedGuests = new Set(invitedGuests.map(normalizeGuestName));
 
-  if (!allowedGuests.has(normalizeGuestName(input.value))) {
-    error.textContent = "404 NOT FOUND!";
+  if (!isInvitedGuest(input.value)) {
+    error.textContent = "¡Invitación NO encontrada!";
     input.setAttribute("aria-invalid", "true");
     input.select();
     return;
@@ -271,6 +295,7 @@ function openDetailsEnvelope() {
   button.closest(".invite-envelope").classList.add("is-opening");
   button.setAttribute("aria-expanded", "true");
   button.disabled = true;
+  document.body.classList.remove("page-locked");
   window.setTimeout(() => {
     byId("promesa").scrollIntoView({
       behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
