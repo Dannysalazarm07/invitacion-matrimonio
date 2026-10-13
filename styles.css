@@ -1119,7 +1119,9 @@ body.page-locked .scroll-cue {
 }
 
 #detalles .event-card__photo img {
-  object-position: center 18%;
+  max-height: 18rem;
+  object-fit: cover;
+  object-position: center 28%;
 }
 
 .event-card__photo figcaption {
