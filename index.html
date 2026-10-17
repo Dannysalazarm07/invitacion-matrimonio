@@ -88,6 +88,20 @@
     </section>
 
     <audio id="background-music" src="audio/hasta-mi-final-desde-34.mp3" preload="none"></audio>
+    <button
+      class="music-toggle"
+      id="music-toggle"
+      type="button"
+      aria-label="Pausar música de fondo"
+      aria-pressed="true"
+    >
+      <svg aria-hidden="true" viewBox="0 0 24 24">
+        <path d="M4 9v6h4l5 4V5L8 9H4Z"></path>
+        <path d="M16 9a5 5 0 0 1 0 6M18.5 6.5a9 9 0 0 1 0 11"></path>
+        <path class="music-toggle__mute-line" d="m4 4 16 16"></path>
+      </svg>
+    </button>
+
     <main id="invitation" class="invitation" hidden>
       <header class="hero" id="inicio">
         <img
@@ -175,7 +189,7 @@
             Por tanto, lo que Dios juntó, no lo separe el hombre.
           </p>
           <span class="scripture__mark scripture__mark--closing" aria-hidden="true">”</span>
-          <footer>Marcos 10:6-9 <span>·</span> Reina-Valera 1960</footer>
+          <footer>Marcos 10:6-9</footer>
         </blockquote>
       </section>
 
@@ -267,8 +281,8 @@
             <path d="M32 37s-3.5-2-3.5-4.1a1.8 1.8 0 0 1 3.5-.6 1.8 1.8 0 0 1 3.5.6C35.5 35 32 37 32 37Z" fill="#b99a62"/>
           </svg>
           <p class="gift-note__message">
-            Tu presencia es nuestro mejor regalo. Si deseas tener un detalle con nosotros,
-            recibiremos con mucho cariño un sobre con dinero durante la celebración.
+            Tu presencia es nuestro mejor regalo. Si deseas tener este detalle con nosotros,
+            lo recibiremos con mucho cariño durante la celebración.
           </p>
           <p class="gift-note__signoff">¡Gracias por compartir con nosotros este día tan especial!</p>
         </div>
@@ -309,7 +323,7 @@
       </section>
 
       <section class="countdown section" id="cuenta-regresiva" aria-labelledby="countdown-title">
-        <p class="eyebrow">La cuenta regresiva comienza</p>
+        <p class="eyebrow">Nuestro gran día</p>
         <h2 class="section-title" id="countdown-title">Cada vez falta menos</h2>
         <svg class="countdown__ornament" viewBox="0 0 48 64" aria-hidden="true" focusable="false">
           <path class="countdown__ornament-frame" d="M7 5.5h34M7 58.5h34M11 7c0 11 13 13.5 13 25S11 46 11 57M37 7c0 11-13 13.5-13 25s13 14 13 25" />
@@ -324,17 +338,21 @@
           <div class="countdown__unit"><span id="seconds">--</span><small>segundos</small></div>
         </div>
         <p class="countdown__message" id="countdown-message" aria-live="polite"></p>
+        <p class="countdown__event">
+          <span class="countdown__event-date" id="countdown-event-date"></span>
+          <span class="countdown__event-details" id="countdown-event-details"></span>
+        </p>
       </section>
 
       <section class="section section--soft faq" id="preguntas" aria-labelledby="faq-title">
         <p class="eyebrow">Información útil</p>
-        <h2 class="section-title" id="faq-title">Preguntas frecuentes</h2>
+        <h2 class="section-title" id="faq-title">Preguntas importantes</h2>
         <details>
           <summary>¿Hay parqueadero?</summary>
           <p id="parking-answer"></p>
         </details>
         <details>
-          <summary>¿Pueden asistir niños?</summary>
+          <summary>¿Pueden asistir niños a la celebración?</summary>
           <p id="children-answer"></p>
         </details>
         <details>
@@ -360,20 +378,6 @@
         <p class="footer__names" id="footer-names"></p>
         <a class="text-link" href="#inicio">Volver al inicio ↑</a>
         <p class="footer__credit">Architecture, infrastructure, design &amp; development · MSc. Daniel Salazar</p>
-        <button
-          class="music-toggle"
-          id="music-toggle"
-          type="button"
-          aria-label="Pausar música de fondo"
-          aria-pressed="true"
-          hidden
-        >
-          <svg aria-hidden="true" viewBox="0 0 24 24">
-            <path d="M4 9v6h4l5 4V5L8 9H4Z"></path>
-            <path d="M16 9a5 5 0 0 1 0 6M18.5 6.5a9 9 0 0 1 0 11"></path>
-            <path class="music-toggle__mute-line" d="m4 4 16 16"></path>
-          </svg>
-        </button>
       </footer>
     </main>
   </body>

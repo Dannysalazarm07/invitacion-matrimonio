@@ -20,10 +20,10 @@ const wedding = {
     address: "Calle 123 #6, Mz 35-42, vía al Salado, barrio Santa Ana, Ibagué, Tolima",
   },
   dressCode: "Vestuario formal",
-  menDressCode: "No llevar traje azul, beige ni corbatín",
-  womenDressCode: "No llevar vestido blanco",
+  menDressCode: "Se reserva el uso de corbatín, traje azul y beige",
+  womenDressCode: "Se reserva el uso de vestido blanco",
   parking: "Sí, habrá parqueaderos disponibles para carros y motocicletas, tanto en el lugar de la ceremonia como en el de la celebración.",
-  children: "Preferiblemente no, por los horarios del evento y las responsabilidades adicionales que implicaría para los papás. Agradecemos mucho tu comprensión.",
+  children: "No están pérmitidos los niños en la celebración, por los horarios y las responsabilidades adicionales que implicaría para los papás. Agradecemos mucho tu comprensión.",
   arrival: "Recomendamos llegar al menos 15 minutos antes de la hora indicada.",
   celebrationEnd: "La celebración terminará a las 3:00 a. m. Para regresar, te recomendamos tomar un taxi o contar con un conductor elegido si vas a consumir bebidas alcohólicas. Queremos que todos regresen a casa de manera segura.",
   rsvpDeadline: "Agradecemos que nos confirmes antes del 1 de diciembre de 2026, tanto si podrás acompañarnos como si no. Así podremos organizarlo todo con mucho cariño.",
@@ -39,6 +39,8 @@ const invitedGuests = JSON.parse(
   ),
 );
 const byId = (id) => document.getElementById(id);
+let musicEnabled = true;
+let musicHasStarted = false;
 
 // Actualiza los textos y crea enlaces de mapas a partir de las direcciones configuradas.
 function populateInvitation() {
@@ -75,6 +77,10 @@ function populateInvitation() {
   }).format(date);
   byId("wedding-date").textContent =
     formattedDate.replace(/^./u, (letter) => letter.toLocaleUpperCase("es-CO"));
+  byId("countdown-event-date").textContent =
+    formattedDate.replace(/^./u, (letter) => letter.toLocaleUpperCase("es-CO"));
+  byId("countdown-event-details").textContent =
+    `${wedding.ceremony.time} · ${wedding.ceremony.place} · ${wedding.city}`;
 
   setMapLinks("ceremony", wedding.ceremony.address);
   setMapLinks("reception", wedding.reception.address);
@@ -248,46 +254,52 @@ function validateGuest(event) {
   }, window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 600);
 }
 
-function updateMusicButton(isPlaying) {
+function updateMusicButton() {
   const button = byId("music-toggle");
-  button.hidden = false;
-  button.setAttribute("aria-label", `${isPlaying ? "Pausar" : "Reproducir"} música de fondo`);
-  button.setAttribute("aria-pressed", String(isPlaying));
+  button.setAttribute(
+    "aria-label",
+    `${musicEnabled ? "Pausar" : "Reproducir"} música de fondo`,
+  );
+  button.setAttribute("aria-pressed", String(musicEnabled));
 }
 
 function reportMusicError(error) {
   console.error("No se pudo reproducir la música de fondo.", error);
-  updateMusicButton(false);
+  musicHasStarted = false;
 }
 
 function replayBackgroundMusic() {
   const music = byId("background-music");
+  if (!musicEnabled || document.hidden) {
+    return;
+  }
+
   music.currentTime = 0;
-  music.play().then(
-    () => updateMusicButton(true),
-    reportMusicError,
-  );
+  startBackgroundMusic();
 }
 
 function startBackgroundMusic() {
   const music = byId("background-music");
+  if (!musicEnabled || document.hidden) {
+    return;
+  }
 
   music.volume = 0.07;
-  music.play().then(
-    () => updateMusicButton(true),
-    reportMusicError,
-  );
+  musicHasStarted = true;
+  music.play().catch(reportMusicError);
 }
 
 function toggleBackgroundMusic() {
   const music = byId("background-music");
-  if (music.paused) {
+  musicEnabled = !musicEnabled;
+  updateMusicButton();
+
+  if (musicEnabled) {
     startBackgroundMusic();
     return;
   }
 
   music.pause();
-  updateMusicButton(false);
 }
 
 function openDetailsEnvelope() {
@@ -297,6 +309,7 @@ function openDetailsEnvelope() {
   button.disabled = true;
   document.documentElement.classList.remove("page-locked");
   document.body.classList.remove("page-locked");
+  document.querySelector(".footer").append(byId("music-toggle"));
   window.setTimeout(() => {
     byId("promesa").scrollIntoView({
       behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
@@ -305,6 +318,16 @@ function openDetailsEnvelope() {
       block: "start",
     });
   }, window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 1500);
+}
+
+function pauseMusicWhenHidden() {
+  byId("background-music").pause();
+}
+
+function resumeMusicWhenVisible() {
+  if (musicEnabled && musicHasStarted) {
+    startBackgroundMusic();
+  }
 }
 
 function keepMusicControlClearOfFooter() {
@@ -343,7 +366,17 @@ byId("guest-name").addEventListener("input", () => {
 byId("open-details").addEventListener("click", openDetailsEnvelope);
 byId("music-toggle").addEventListener("click", toggleBackgroundMusic);
 byId("background-music").addEventListener("ended", replayBackgroundMusic);
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) {
+    pauseMusicWhenHidden();
+  } else {
+    resumeMusicWhenVisible();
+  }
+});
+window.addEventListener("pagehide", pauseMusicWhenHidden);
+window.addEventListener("pageshow", resumeMusicWhenVisible);
 
 populateInvitation();
 startCountdown();
 keepMusicControlClearOfFooter();
+updateMusicButton();
