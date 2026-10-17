@@ -295,6 +295,7 @@ function openDetailsEnvelope() {
   button.closest(".invite-envelope").classList.add("is-opening");
   button.setAttribute("aria-expanded", "true");
   button.disabled = true;
+  document.documentElement.classList.remove("page-locked");
   document.body.classList.remove("page-locked");
   window.setTimeout(() => {
     byId("promesa").scrollIntoView({
@@ -304,6 +305,22 @@ function openDetailsEnvelope() {
       block: "start",
     });
   }, window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 1500);
+}
+
+function keepMusicControlClearOfFooter() {
+  if (!("IntersectionObserver" in window)) {
+    return;
+  }
+
+  const footer = document.querySelector(".footer");
+  const button = byId("music-toggle");
+  const observer = new IntersectionObserver(([entry]) => {
+    const footerIsVisible = entry.isIntersecting;
+    footer.classList.toggle("music-toggle--active", footerIsVisible);
+    button.classList.toggle("music-toggle--footer", footerIsVisible);
+  });
+
+  observer.observe(footer);
 }
 
 function useHeroFallback() {
@@ -329,3 +346,4 @@ byId("background-music").addEventListener("ended", replayBackgroundMusic);
 
 populateInvitation();
 startCountdown();
+keepMusicControlClearOfFooter();
