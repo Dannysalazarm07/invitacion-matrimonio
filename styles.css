@@ -52,6 +52,15 @@ body.page-locked {
   overscroll-behavior: none;
 }
 
+body.page-locked #invitation > :not(.hero) {
+  display: none;
+}
+
+body.page-locked .hero {
+  min-height: 100vh;
+  min-height: 100svh;
+}
+
 body,
 button,
 a {
