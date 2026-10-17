@@ -24,6 +24,7 @@ const wedding = {
   womenDressCode: "Te pedimos no usar vestido blanco",
   parking: "Sí, habrá parqueaderos disponibles para carros y motocicletas, tanto en el lugar de la ceremonia como en el de la celebración.",
   children: "Preferiblemente no, por los horarios y las responsabilidades adicionales que implicaría para los papás. Agradecemos mucho tu comprensión.",
+  pets: "No es posible, debido a las restricciones de la iglesia y del salón del evento.",
   arrival: "Recomendamos llegar al menos 15 minutos antes de la hora indicada.",
   celebrationEnd: "La celebración terminará a las 3:00 a. m. Para regresar, te recomendamos tomar un taxi o contar con un conductor elegido si vas a consumir bebidas alcohólicas. Queremos que todos regresen a casa de manera segura.",
   rsvpDeadline: "Agradecemos que nos confirmes antes del 1 de diciembre de 2026, tanto si podrás acompañarnos como si no. Así podremos organizarlo todo con mucho cariño.",
@@ -58,6 +59,7 @@ function populateInvitation() {
   byId("women-dress-code").textContent = wedding.womenDressCode;
   byId("parking-answer").textContent = wedding.parking;
   byId("children-answer").textContent = wedding.children;
+  byId("pets-answer").textContent = wedding.pets;
   byId("arrival-answer").textContent = wedding.arrival;
   byId("celebration-end-answer").textContent = wedding.celebrationEnd;
   byId("rsvp-deadline-answer").textContent = wedding.rsvpDeadline;
