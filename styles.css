@@ -1081,14 +1081,14 @@ body.page-locked .scroll-cue {
 .event-card__time {
   display: inline-block;
   margin: 0 auto 0.9rem;
-  padding: 0.35rem 0.9rem;
+  padding: 0.4rem 1rem;
   border: 1px solid rgb(102 135 165 / 24%);
   border-radius: 999px;
   background: var(--color-blue-pale);
   color: var(--color-blue-ink);
-  font-size: 0.85rem;
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
   font-weight: 600;
-  letter-spacing: 0.035em;
+  letter-spacing: 0.025em;
 }
 
 .event-card__place {
@@ -1442,6 +1442,25 @@ body.page-locked .scroll-cue {
   margin-bottom: 1rem !important;
   color: #f0d99f;
   font-size: 1.8rem;
+}
+
+.footer__credit {
+  max-width: 34rem;
+  margin: 1.25rem auto 0 !important;
+  color: rgb(183 194 207 / 28%);
+  font-size: 0.56rem;
+  letter-spacing: 0.045em;
+  line-height: 1.6;
+}
+
+.footer__credit::before {
+  display: block;
+  width: 1.5rem;
+  height: 1px;
+  margin: 0 auto 0.7rem;
+  background: var(--color-gold);
+  content: "";
+  opacity: 0.9;
 }
 
 .footer .text-link {

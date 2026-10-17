@@ -17,7 +17,7 @@ const wedding = {
   reception: {
     time: "7:00 p. m.",
     place: "Sede deportiva Santa Ana de la Universidad de Ibagué",
-    address: "Calle 123, Mz 35-42, vía al Salado, barrio Santa Ana, Ibagué, Tolima",
+    address: "Calle 123 #6, Mz 35-42, vía al Salado, barrio Santa Ana, Ibagué, Tolima",
   },
   dressCode: "Vestuario formal",
   menDressCode: "No llevar traje azul, beige ni corbatín",
@@ -133,7 +133,7 @@ function configureRsvp() {
 
 function buildRsvpMessage(guestName = "[nombre de la persona invitada]") {
   return [
-    `¡Hola! Soy ${guestName}. Sobre la invitación de ${wedding.names}:`,
+    `¡Hola! Soy ${guestName}. Sobre la invitación de boda de ${wedding.names}:`,
     "Mi respuesta es: [Sí asistiré / No podré asistir].",
   ].join("\n");
 }
